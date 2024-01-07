@@ -1,40 +1,42 @@
 /* Стили для таблицы*/
-@media (max-width: 600px) {  
-    .table{
-        margin: 0; 
-        padding: 0;
-        
-    }
-    
-    .table {
-        font-size: 11px; 
-    }
+@media (max-width: 600px) {
+  .table {
+    margin: 0;
+    padding: 0;
 
-    .table th, .table td {
-        padding: 5px;  
-    }
-
-/* Стили для тела футера*/
-}
-body {
-    background-color: #ffffff;
   }
+
+  .table {
+    font-size: 11px;
+  }
+
+  .table th,
+  .table td {
+    padding: 5px;
+  }
+
+  /* Стили для тела футера*/
+}
+
+body {
+  background-color: #ffffff;
+}
 
 /* Стили для фона футера*/
 footer .container-fluid {
-    background-color: rgba(204, 153, 255, 0.5);
-  }
-  
+  background-color: rgba(204, 153, 255, 0.5);
+}
+
 
 footer .text-center {
-    background-color: rgb(87, 134, 228); 
-  }
+  background-color: rgb(87, 134, 228);
+}
 
 /* Стили для текста навбара */
-.navbar .navbar-brand{
-    color: #040d8a; 
-  }
-  
+.navbar .navbar-brand {
+  color: #040d8a;
+}
+
 .navbar .nav-link {
-    color: #040d8a
-  }
+  color: #040d8a
+}
