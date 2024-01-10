@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // Константы для API
 const API_ADDRESS = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru';
 const API_KEY = "f9aa6e2e-feb2-4094-ad8c-bc346a11d342";
@@ -30,8 +29,29 @@ function shortenText(text) {
     return firstSentence;
 }
 
+function showAlert(message, type) {
+    // Создание HTML-кода предупреждения с использованием шаблонной строки
+    const alertHtml = `
+        <div class="alert alert-${type} 
+        alert-dismissible fade show" role="alert">
+            ${message} 
+            <button type="button" class="btn-close" 
+            data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+
+    const alertContainer = document.getElementById('alert-container');
+    alertContainer.innerHTML += alertHtml;//Добавление предупреждения вконтейнер
+
+    // Установка таймера для автоматического удаления предупреждения
+    setTimeout(() => {
+        const alert = alertContainer.querySelector('.alert');
+        if (alert) alert.remove();
+    }, 5000);
+}
+
 // Создает HTML элемент для страницы
-function createPageItem(page, isActive = false, isDisabled = false, text = page) {
+function createPageItem(page, isActive = false, 
+    isDisabled = false, text = page) {
     if (isActive) {
         activeClass = 'active';
     } else {
@@ -44,7 +64,8 @@ function createPageItem(page, isActive = false, isDisabled = false, text = page)
     }
     return `
         <li class="page-item ${activeClass} ${disabledClass}">
-            <a class="page-link" href="#routes-list" onclick="changeRoutesPage(${page})">${text}</a>
+            <a class="page-link" href="#routes-list" 
+            onclick="changeRoutesPage(${page})">${text}</a>
         </li>`;
 }
 
@@ -69,7 +90,8 @@ function renderRoutesPaginationElement(elementsCount) {
         pagesHTML += createPageItem(i, i === ACTIVE_PAGE);
     }
 
-    const paginationHTML = `<ul class="pagination">${prevPage}${pagesHTML}${nextPage}</ul>`;
+    const paginationHTML = `<ul class="pagination">
+    ${prevPage}${pagesHTML}${nextPage}</ul>`;
     document.getElementById('pagination').innerHTML = paginationHTML;
 }
 
@@ -90,17 +112,23 @@ function renderRoutes(data) {
         table +=
             `<tr>
             <th scope="row">${data[i].name}</th>
-            <td><span data-bs-toggle="tooltip" data-bs-placement="top" title="${data[i].description}">${shortDescription}</span></td>
-            <td><span data-bs-toggle="tooltip" data-bs-placement="top" title="${data[i].mainObject}">${shortMainObject}</span></td>
-            <td><button type="button" class="btn btn-primary btn-sm" onclick="getGuides(${data[i].id}, '${data[i].name}')">Выбрать</button></td>
+            <td><span data-bs-toggle="tooltip" data-bs-placement="top" 
+            title="${data[i].description}">${shortDescription}</span></td>
+            <td><span data-bs-toggle="tooltip" data-bs-placement="top" 
+            title="${data[i].mainObject}">${shortMainObject}</span></td>
+            <td><button type="button" class="btn btn-info btn-sm" 
+            onclick="getGuides(${data[i].id}, '${data[i].name}')">
+            Выбрать</button></td>
         </tr>`;
     }
 
     document.getElementById("routes-table-body").innerHTML = table;
 
     // Активация tooltip
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    const tooltipTriggerList = 
+    document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => 
+        new bootstrap.Tooltip(tooltipTriggerEl));
 }
 
 // Изменяет активную страницу
@@ -151,12 +179,15 @@ function renderGuides(data, routeId, routeName) {
     for (let i = 0; i < data.length; i++) {
         table +=
             `<tr>
-          <td> <img src="gid.jpg" class=" img mx-auto d-block" width="40" > </td>
+          <td> <img src="gid.jpg" 
+          class=" img mx-auto d-block" width="40" > </td>
           <td>${data[i].name}</td>
           <td>${data[i].language}</td>
           <td>${pluralizeYears(data[i].workExperience)}</td>
           <td>${data[i].pricePerHour}₽/час</td>
-          <td><button type="button" class="btn btn-primary btn-sm" onclick="renderBuyButton(${routeId}, '${routeName}', ${data[i].id}, '${data[i].name}', ${data[i].pricePerHour})">Выбрать</button></td>
+          <td><button type="button" class="btn btn-info btn-sm" 
+          onclick="renderBuyButton(${routeId}, '${routeName}', ${data[i].id}, 
+          '${data[i].name}', ${data[i].pricePerHour})">Выбрать</button></td>
           </tr>`;
     }
 
@@ -192,7 +223,11 @@ function getGuides(routeId, routeName) {
 // Отрисовывает кнопку для оформления заявки
 function renderBuyButton(routeId, routeName, guideId, guideName, pricePerHour) {
     currentPricePerHour = pricePerHour;
-    let buttonHTML = `<button type="button" class="btn btn-success" onclick="prepareForm(${routeId}, '${routeName}', ${guideId}, '${guideName}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Оформить заявку</button>`;
+    let buttonHTML = `<button type="button" class="btn btn-success" 
+    onclick=
+    "prepareForm(${routeId}, '${routeName}', ${guideId}, '${guideName}')"
+    data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Оформить заявку</button>`;
     let container = document.getElementById("buyContainer");
     container.innerHTML = buttonHTML;
 }
@@ -223,8 +258,10 @@ function isBetween(lowerBound, number, upperBound) {
 
 // Подсчитывает итоговую стоимость маршрута с учетом выбранных опций
 function calculatePrice() {
-    let duration = parseInt(document.getElementById('durationSelect').value, 10);
-    let peopleCount = parseInt(document.getElementById('peopleInput').value, 10);
+    let duration = parseInt(
+        document.getElementById('durationSelect').value, 10);
+    let peopleCount = parseInt(
+        document.getElementById('peopleInput').value, 10);
     let dateValue = document.getElementById('dateInput').value;
     let timeValue = document.getElementById('timeInput').value;
     let dateTime = new Date(dateValue + 'T' + timeValue);
@@ -269,7 +306,8 @@ function calculatePrice() {
     else if (isBetween(5, peopleCount, 9)) numberOfVisitors = 1000;
     else if (isBetween(1, peopleCount, 4)) numberOfVisitors = 0;
 
-    let totalPrice = (currentPricePerHour * duration * isThisDayOff) + isItMorning + isItEvening + numberOfVisitors;
+    let totalPrice = (currentPricePerHour * duration * isThisDayOff) 
+    + isItMorning + isItEvening + numberOfVisitors;
     totalPrice *= option1Multiplier * option2Multiplier;
 
     document.getElementById('totalCost').value = `${Math.round(totalPrice)}₽`;
@@ -285,13 +323,56 @@ function option2CheckPeopleCount(event) {
     }
     option2CheckBox.disabled = event.target.value > 10;
 }
+//Отправляет заявку на сервер
+function createOrder(event) {
+    const xhr = new XMLHttpRequest();
+    const FD = new FormData();
+    url = new URL(API_ADDRESS + '/api/orders');
+    url.searchParams.set('api_key', API_KEY);
+
+    let modalElement = document.getElementById('exampleModal');
+    FD.append("guide_id", currentGuideId);
+    FD.append("route_id", currentRouteId);
+    FD.append("date", document.getElementById('dateInput').value);
+    FD.append("time", document.getElementById('timeInput').value);
+    FD.append("duration", parseInt(
+        document.getElementById('durationSelect').value, 10));
+    FD.append("persons", parseInt(
+        document.getElementById('peopleInput').value, 10));
+    FD.append("price", parseInt(
+        document.getElementById('totalCost').value, 10));
+    FD.append("time", document.getElementById('timeInput').value);
+    FD.append("optionFirst", Number(
+        document.getElementById('option1').checked));
+    FD.append("optionSecond", Number(
+        document.getElementById('option1').checked));
+
+
+    xhr.open("POST", url);
+    xhr.responseType = 'json';
+    xhr.send(FD);
+    xhr.onload = function () {
+        if (xhr.status != 200) {
+            //alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+            showAlert('Произошла ошибка при создании заявки', 'danger');
+        } else {
+            console.log(xhr.response);
+            new bootstrap.Modal(modalElement).hide();
+            showAlert('Заявка успешно создана', 'success');
+        }
+    };
+
+}
 
 // Добавляет обработчики событий на элементы формы
-document.getElementById('durationSelect').addEventListener('change', calculatePrice);
-document.getElementById('peopleInput').addEventListener('change', option2CheckPeopleCount);
-document.getElementById('peopleInput').addEventListener('change', calculatePrice);
+document.getElementById('durationSelect')
+    .addEventListener('change', calculatePrice);
+document.getElementById('peopleInput')
+    .addEventListener('change', option2CheckPeopleCount);
+document.getElementById('peopleInput')
+    .addEventListener('change', calculatePrice);
 document.getElementById('option1').addEventListener('change', calculatePrice);
 document.getElementById('option2').addEventListener('change', calculatePrice);
-
+document.getElementById('sendForm').addEventListener("click", createOrder);
 // Запускает загрузку маршрутов при загрузке страницы
 window.onload = getRoutes;

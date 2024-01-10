@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>погулЯйка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--Шапка сайта с заголовком, логотипом и блоком навигации с ссылкой для перехода в
+личный кабинет (navbar)-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
+        <a class="navbar-brand" href="indexHP.html">
+            <b class="navbar-brand">
+                <div class="col-1">
+                    <img src="logo.png" alt="logo" class="img-fluid">
+                    погулЯйка
+                    <br>
+                    <span class="fs-6 text-muted">Экскурсии по Москве</span>
+                </div>
+            </b>
+        </a>
+        <!--Меню для работы на мобильных устройствах-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--Ссылки из навигационной панели-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="indexHP.html">На главную страницу </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="indexLK.html">Личный кабинет</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Область для всплывающих уведомлений (alerts)-->
+    <div id="alert-container" class="position-fixed bottom-0 p-3 d-flex justify-content-center">
+    </div>
+
+    <!-- Таблица с заявками на экскурсии -->
+    <div class="container-fluid table" id="tableroutes">
+        <h2 class="text-center mt-1">Ваши заявки на экскурсию</h2>
+        <table class="table table-warning table-bordered table-striped ">
+            <!-- Заголовок таблицы -->
+            <thead>
+                <tr>
+                    <th scope="col" class="col-1 col-xl-1">№</th>
+                    <th scope="col" class="col-1 col-xl-1">Название маршрута</th>
+                    <th scope="col" class="col-1 col-xl-1">Дата</th>
+                    <th scope="col" class="col-1 col-xl-1">Стоимость</th>
+                    <th scope="col" class="col-1 col-xl-1"></th>
+                </tr>
+            </thead>
+            <!-- Тело таблицы (заполняется динамически с помощью JavaScript) -->
+            <tbody id="routes-table-body">
+                <!-- Вставляем случайные данные -->
+                <tr>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Модальное окно просмотра информации об экскурсии -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Информация об экскурсии</h2>
+            <p><strong id="fio">ФИО Гида:</strong></p>
+            <p><strong id="route">Название маршрута:</strong></p>
+            <p><strong id="dataEcs">Дата экскурсии:</strong></p>
+            <p><strong id="timeEcs">Время начала:</strong></p>
+            <p><strong id="durationEcs">Длительность экскурсии:</strong></p>
+            <p><strong id="PeoplesCnt">Количество человек:</strong></p>
+            <h3>Подзаголовок</h3>
+            <p><strong id="Funct">Название опции:</strong> опции</p>
+            <!-- Другие опции здесь -->
+            <p><strong>Стоимость:</strong> число</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования данных -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Редактировать данные</h2>
+            <label for="editFIO">ФИО Гида:</label>
+            <input type="text" id="editFIO">
+            <label for="editRoute">Название маршрута:</label>
+            <input type="text" id="editRoute">
+            <label for="editDataEcs">Дата экскурсии:</label>
+            <input type="date" id="editDataEcs">
+            <label for="editTimeEcs">Время начала:</label>
+            <input type="time" id="editTimeEcs">
+            <label for="editDurationEcs">Длительность экскурсии:</label>
+            <input type="time" id="editDurationEcs">
+            <label for="editPeopleCnt">Количество человек:</label>
+            <input type="number" id="editPeopleCnt">
+            <button>Сохранить изменения</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно удаления данных -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Удаление данных</h2>
+            <p>Вы уверены, что хотите удалить заявку?</p>
+            <button>Удалить</button>
+            <button id="peredumal">Я передумал</button>
+        </div>
+    </div>
+
+    <!--Футер с контактными данными-->
+    <footer class="bg-light text-center text-lg-start mt-3">
+        <div class="container-fluid p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">О компании</h5>
+                    <p>
+                        «погулЯйка» — платформа простого и надежного онлайн бронирования экскурсий на русском языке по
+                        всему миру
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Контакты</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-dark">Адрес: ул. Ленина, 10, г. Москва</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Телефон: +7 (495) 111-11-11</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Email: pogulayka@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Социальные сети</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-dark">ВКонтакте</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Интаграмм</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3">
+            © 2024 Все права защищены.
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="mainLK.js"></script>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -40,3 +40,7 @@ footer .text-center {
 .navbar .nav-link {
   color: #040d8a
 }
+
+#alert-container {
+  z-index: 5000;
+}
