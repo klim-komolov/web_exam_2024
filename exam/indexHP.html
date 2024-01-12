@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>погулЯйка</title>
+    <!-- Подключение стилей Bootstrap для создания интерфейса -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Подключение стилей style.css -->
     <link href="style.css" rel="stylesheet">
 </head>
 
@@ -31,12 +33,13 @@
         </button>
         <!--Ссылки из навигационной панели-->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!--На главную-->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="indexHP.html">На главную страницу </a>
                 </li>
             </ul>
-
+            <!--Личный кабинет-->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="indexLK.html">Личный кабинет</a>
@@ -186,7 +189,7 @@
                     <div class="mb-3">
                         <label for="durationSelect" class="form-label">Длительность экскурсии:</label>
                         <select class="form-select" id="durationSelect">
-                            <option selected>1 час</option>
+                            <option value="1" selected>1 час</option>
                             <option value="2">2 часа</option>
                             <option value="3">3 часа</option>
                         </select>
@@ -194,7 +197,7 @@
                     <!-- Количество человек -->
                     <div class="mb-3">
                         <label for="peopleInput" class="form-label">Количество человек:</label>
-                        <input type="number" class="form-control" id="peopleInput" min="1" max="20">
+                        <input type="number" class="form-control" id="peopleInput" min="1" max="20" value="1">
                     </div>
                     <!-- Дополнительные опции -->
                     <div class="mb-3">
@@ -219,7 +222,7 @@
                     <div class="mb-3 row">
                         <label for="totalCost" class="col-sm-3 col-form-label">Стоимость:</label>
                         <div class="col-sm-9">
-                            <input type="text" readonly class="form-control-plaintext" id="totalCost" value="0р">
+                            <input type="text" readonly class="form-control-plaintext" id="totalCost" value="? руб">
                         </div>
                     </div>
                 </div>
@@ -252,7 +255,7 @@
                             <a href="#!" class="text-dark">Телефон: +7 (495) 111-11-11</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Email: pogulayka@company.com</a>
+                            <a href="#!" class="text-dark">Email: support@pogulayka.ru</a>
                         </li>
                     </ul>
                 </div>

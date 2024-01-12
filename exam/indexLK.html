@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>погулЯйка</title>
+    <!-- Подключение стилей Bootstrap для создания интерфейса -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Подключение иконок Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Подключение стилей style.css -->
     <link href="style.css" rel="stylesheet">
 </head>
 
@@ -31,12 +35,14 @@
         </button>
         <!--Ссылки из навигационной панели-->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!--На главную-->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="indexHP.html">На главную страницу </a>
                 </li>
             </ul>
 
+            <!--Личный кабинет-->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="indexLK.html">Личный кабинет</a>
@@ -65,13 +71,11 @@
             </thead>
             <!-- Тело таблицы (заполняется динамически с помощью JavaScript) -->
             <tbody id="routes-table-body">
-                <!-- Вставляем случайные данные -->
-                <tr>
-                </tr>
-                <tr>
-                </tr>
             </tbody>
         </table>
+        <nav aria-label="Навигация по страницам">
+            <ul class="pagination justify-content-center" id="pagination"> </ul>
+        </nav>
     </div>
 
     <!-- Модальное окно просмотра информации об экскурсии -->
@@ -92,42 +96,11 @@
         </div>
     </div>
 
-    <!-- Модальное окно редактирования данных -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Редактировать данные</h2>
-            <label for="editFIO">ФИО Гида:</label>
-            <input type="text" id="editFIO">
-            <label for="editRoute">Название маршрута:</label>
-            <input type="text" id="editRoute">
-            <label for="editDataEcs">Дата экскурсии:</label>
-            <input type="date" id="editDataEcs">
-            <label for="editTimeEcs">Время начала:</label>
-            <input type="time" id="editTimeEcs">
-            <label for="editDurationEcs">Длительность экскурсии:</label>
-            <input type="time" id="editDurationEcs">
-            <label for="editPeopleCnt">Количество человек:</label>
-            <input type="number" id="editPeopleCnt">
-            <button>Сохранить изменения</button>
-        </div>
-    </div>
-
-    <!-- Модальное окно удаления данных -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Удаление данных</h2>
-            <p>Вы уверены, что хотите удалить заявку?</p>
-            <button>Удалить</button>
-            <button id="peredumal">Я передумал</button>
-        </div>
-    </div>
-
     <!--Футер с контактными данными-->
     <footer class="bg-light text-center text-lg-start mt-3">
         <div class="container-fluid p-4">
             <div class="row">
+                <!--Блок о компании, с её лозунгом-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h5 class="text-uppercase">О компании</h5>
                     <p>
@@ -135,6 +108,7 @@
                         всему миру
                     </p>
                 </div>
+                <!--Блок с контактными данными-->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">Контакты</h5>
                     <ul class="list-unstyled mb-0">
@@ -145,10 +119,11 @@
                             <a href="#!" class="text-dark">Телефон: +7 (495) 111-11-11</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Email: pogulayka@company.com</a>
+                            <a href="#!" class="text-dark">Email: support@pogulayka.ru</a>
                         </li>
                     </ul>
                 </div>
+                <!--Блок с социальными сетями компании-->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">Социальные сети</h5>
                     <ul class="list-unstyled mb-0">
@@ -166,13 +141,118 @@
             © 2024 Все права защищены.
         </div>
 
+        <!-- Модальное окно удаления данных -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Удаление заявки</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы уверены, что хотите удалить заявку?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                        <button type="button" class="btn btn-primary">Да</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Модальное окно-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Оформление заявки</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- ФИО гида -->
+                        <div class="mb-3 row">
+                            <label for="guideName" class="col-sm-3 col-form-label">ФИО гида:</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" id="guideName" value="">
+                            </div>
+                        </div>
+                        <!-- Название маршрута -->
+                        <div class="mb-3 row">
+                            <label for="routeName" class="col-sm-3 col-form-label">Маршрут:</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" id="routeName" value="">
+                            </div>
+                        </div>
+                        <!-- Дата экскурсии -->
+                        <div class="mb-3">
+                            <label for="dateInput" class="form-label">Дата экскурсии:</label>
+                            <input type="date" class="form-control" id="dateInput">
+                        </div>
+                        <!-- Время начала -->
+                        <div class="mb-3">
+                            <label for="timeInput" class="form-label">Время начала:</label>
+                            <input type="time" class="form-control" id="timeInput" min="09:00" max="23:00" step="1800">
+                        </div>
+                        <!-- Длительность экскурсии -->
+                        <div class="mb-3">
+                            <label for="durationSelect" class="form-label">Длительность экскурсии:</label>
+                            <select class="form-select" id="durationSelect">
+                                <option value="1" selected>1 час</option>
+                                <option value="2">2 часа</option>
+                                <option value="3">3 часа</option>
+                            </select>
+                        </div>
+                        <!-- Количество человек -->
+                        <div class="mb-3">
+                            <label for="peopleInput" class="form-label">Количество человек:</label>
+                            <input type="number" class="form-control" id="peopleInput" min="1" max="20">
+                        </div>
+                        <!-- Дополнительные опции -->
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <!--Опция 1-->
+                                    <label class="form-check-label" for="option1">
+                                        <input class="form-check-input" type="checkbox" id="option1" checked>
+                                        <strong>Интерактивный путеводитель</strong>
+                                    </label>
+                                    <p class="small text-muted mb-0">Увеличит стоимость в 1.5 раза</p>
+                                </div>
+                                <!--Опция 2-->
+                                <div>
+                                    <label class="form-check-label" for="option2">
+                                        <input class="form-check-input" type="checkbox" id="option2">
+                                        <strong>Сопровождение сурдопереводчика</strong>
+                                    </label>
+                                    <p class="small text-muted mb-0">Опция для групп до 10 человек</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Итоговая стоимость -->
+                        <div class="mb-3 row">
+                            <label for="totalCost" class="col-sm-3 col-form-label">Стоимость:</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" id="totalCost" value="0р">
+                            </div>
+                        </div>
+                    </div>
+                    <!--Добавление кнопок-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        <button type="button" class="btn btn-success" id="sendForm">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Подключение скриптов Bootstrap, включая Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+<!-- Подключение скрипта mainLK.js, для работы ЛК-->
         <script src="mainLK.js"></script>
 
-    </footer>
-
+    </footer>ы
 
 </body>
 

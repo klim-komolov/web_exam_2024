@@ -29,8 +29,9 @@ function shortenText(text) {
     return firstSentence;
 }
 
+// Создание HTML-кода предупреждения
 function showAlert(message, type) {
-    // Создание HTML-кода предупреждения с использованием шаблонной строки
+
     const alertHtml = `
         <div class="alert alert-${type} 
         alert-dismissible fade show" role="alert">
@@ -39,8 +40,9 @@ function showAlert(message, type) {
             data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
 
+    //Добавление предупреждения в контейнер
     const alertContainer = document.getElementById('alert-container');
-    alertContainer.innerHTML += alertHtml;//Добавление предупреждения вконтейнер
+    alertContainer.innerHTML += alertHtml;
 
     // Установка таймера для автоматического удаления предупреждения
     setTimeout(() => {
@@ -70,18 +72,18 @@ function createPageItem(page, isActive = false,
 }
 
 // Отрисовывает пагинацию
-function renderRoutesPaginationElement(elementsCount) {
-    const maxPage = Math.ceil(elementsCount / 10);
+function renderRoutesPaginationElement(elementsCount, elems_per_page) {
+    const maxPage = Math.ceil(elementsCount / elems_per_page);
     if (ACTIVE_PAGE === 1) {
-        prevPage = createPageItem(1, false, true, '&laquo;');
+        prevPage = createPageItem(1, false, true, 'Предыдущая');
     } else {
-        prevPage = createPageItem(ACTIVE_PAGE - 1, false, false, '&laquo;');
+        prevPage = createPageItem(ACTIVE_PAGE - 1, false, false, 'Предыдущая');
     }
     let nextPage = '';
     if (ACTIVE_PAGE === maxPage) {
-        nextPage = createPageItem(maxPage, false, true, '&raquo;');
+        nextPage = createPageItem(maxPage, false, true, 'Следующая');
     } else {
-        nextPage = createPageItem(ACTIVE_PAGE + 1, false, false, '&raquo;');
+        nextPage = createPageItem(ACTIVE_PAGE + 1, false, false, 'Следующая');
     }
     let pagesHTML = '';
     const start = Math.max(ACTIVE_PAGE - 2, 1);
@@ -133,9 +135,10 @@ function renderRoutes(data) {
 
 // Изменяет активную страницу
 function changeRoutesPage(newPage) {
+    const elems_per_page = 10;
     ACTIVE_PAGE = newPage;
     renderRoutes(ROUTES_DATA);
-    renderRoutesPaginationElement(ROUTES_DATA.length);
+    renderRoutesPaginationElement(ROUTES_DATA.length, elems_per_page);
 }
 
 // Запрашивает данные о маршрутах с сервера
@@ -281,7 +284,7 @@ function calculatePrice() {
         option2Multiplier = 1;
     }
 
-
+    
     let dayOfWeek = dateTime.getDay();
     let hour = dateTime.getHours();
 
@@ -310,7 +313,7 @@ function calculatePrice() {
     + isItMorning + isItEvening + numberOfVisitors;
     totalPrice *= option1Multiplier * option2Multiplier;
 
-    document.getElementById('totalCost').value = `${Math.round(totalPrice)}₽`;
+    document.getElementById('totalCost').value = `${Math.round(totalPrice)}руб`;
 }
 
 // Проверяет количество людей для второй опции
@@ -371,6 +374,7 @@ document.getElementById('peopleInput')
     .addEventListener('change', option2CheckPeopleCount);
 document.getElementById('peopleInput')
     .addEventListener('change', calculatePrice);
+document.getElementById('timeInput').addEventListener('change', calculatePrice);
 document.getElementById('option1').addEventListener('change', calculatePrice);
 document.getElementById('option2').addEventListener('change', calculatePrice);
 document.getElementById('sendForm').addEventListener("click", createOrder);
